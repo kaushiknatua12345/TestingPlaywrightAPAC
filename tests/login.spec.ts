@@ -33,6 +33,28 @@ test('Check if username error message is display if username field is blank', as
     await expect(passwordErrorMessage).toBeVisible();   
    });
 
+/* write test if username and password are blank and click on submit button, then check if both error messages are displayed or not */
+test('check if username and password error messages are given if username and password fields are blank', async ({ page }) => {
+    
+   
+    await page.click('button[type="submit"]');
+ 
+    const userNameErrorMessage = page.locator('text=Username is required');
+    await expect(userNameErrorMessage).toBeVisible();
+ 
+    const passwordErrorMessage = page.locator('text=Password is required');
+    await expect(passwordErrorMessage).toBeVisible();
+});
+
+test('test for invalid username and password', async ({ page }) => {
+    await page.getByRole('textbox', { name: 'Username' }).fill('sdsdss');
+    await page.getByRole('textbox', { name: 'Enter Password' }).fill('dsdsdsdsdddsd');
+    await page.getByRole('button', { name: 'Login' }).click();
+    const errorMessage= page.locator('text=Invalid Username or Password');
+  await expect(errorMessage).toBeVisible();
+});
+
+
 
 
 
