@@ -33,6 +33,15 @@ test('Check if username error message is display if username field is blank', as
     await expect(passwordErrorMessage).toBeVisible();   
    });
 
+test('Check if error message is display if username and password field is invalid', async({page})=>{
+          
+     await page.fill('input[name="name"]','testuser');
+     await page.fill('input[name="password"]','testuser');
+     await page.click('button[type="submit"]');
+    
+     const errorMessage=page.locator('text=Invalid Username or Password');
+     await expect(errorMessage).toBeVisible({ timeout: 10000 });   
+    });
 
 
 
